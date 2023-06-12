@@ -1,0 +1,85 @@
+<html>
+<!-- https://v2.cn.vuejs.org/v2/guide/index.html
+vue实例
+模板语法
+-->
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js 实例 - 列表渲染</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ foo }}</p>
+        <!-- 这里的 `foo` 不会更新！ -->
+        <button v-on:click="foo = 'baz'">Change it</button>
+    </div>
+    <div id="example">
+        <p>{{ a }}</p>
+        <button v-on:click="a += 1">Add 1</button>
+    </div>
+    <div id="app-2">
+      <span>Message: {{ msg }}</span>
+      <span v-once>这个将不会改变: {{ msg }}</span>
+      
+      <p>Using mustaches: {{ rawHtml }}</p>
+      <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+      <button v-bind:disabled="isButtonDisabled">Button</button>
+
+      <p v-if="seen">现在你看到我了</p>
+    </div>
+    <div id="app-3" v-bind:id="dynamicId"></div>
+      
+
+
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script>
+    var obj = {
+        foo: 'bar'
+    }
+    new Vue({
+        el: '#app',
+        data: obj
+    })
+
+    var data = { a: 1 }
+    var vm = new Vue({
+        el: '#example',
+        data: data
+    })
+
+    vm.$data === data // => true
+    vm.$el === document.getElementById('example') // => true
+
+    // $watch 是一个实例方法
+    vm.$watch('a', function (newValue, oldValue) {
+    // 这个回调将在 `vm.a` 改变后调用
+    })
+
+    new Vue({
+        data: {
+            a: 1
+        },
+        created: function () {
+            // `this` 指向 vm 实例
+            console.log('a is: ' + this.a)
+        }
+    })
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+            msg: '页面加载于 ' + new Date().toLocaleString(),
+            rawHtml: '<span style="color:red">This should be red.</span>',
+            isButtonDisabled: true,
+            seen: true
+        }
+    })
+    var app3 = new Vue({
+        el: '#app-3',
+        data: {
+            dynamicId: 'foo'
+        }
+    })
+
+</script>
+</html>
