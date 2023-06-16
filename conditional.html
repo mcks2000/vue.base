@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+</head>
+
+<body>
+    <div>
+        <h1 v-if="awesome">Vue is awesome!</h1>
+        <h1 v-else>Oh no 😢</h1>
+        <hr>
+        <template v-if="ok">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </template>
+        <hr>
+        <div v-if="Math.random() > 0.5">
+            Now you see me
+        </div>
+        <div v-else>
+            Now you don't
+        </div>
+        <hr>
+        <div v-if="type === 'A'">
+            A
+        </div>
+        <div v-else-if="type === 'B'">
+            B
+        </div>
+        <div v-else-if="type === 'C'">
+            C
+        </div>
+        <div v-else>
+            Not A/B/C
+        </div>
+        <hr>
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+          </template>
+          <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email-input">
+          </template>
+          <p></p>
+          <button @click="loginType = 'username'">Username</button>
+          <button @click="loginType = 'email'">Email</button>
+          <hr>
+          <h1 v-show="ok">Hello!</h1>
+    </div>
+
+
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: 'div',
+            data: {
+                awesome: true,
+                ok: true,
+                type: 'B',
+                loginType: 'username'
+            }
+        })
+
+    </script>
+</body>
+
+</html>
