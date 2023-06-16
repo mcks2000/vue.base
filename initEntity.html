@@ -27,7 +27,10 @@ vue实例
 
       <p v-if="seen">现在你看到我了</p>
     </div>
-    <div id="app-3" v-bind:id="dynamicId"></div>
+    <div id="app-3" v-bind:id="dynamicId">
+        <button v-bind:disabled="isButtonDisabled">Button</button>
+    </div>
+    
       
 
 
@@ -77,9 +80,12 @@ vue实例
     var app3 = new Vue({
         el: '#app-3',
         data: {
-            dynamicId: 'foo'
+            dynamicId: 'foo',
+            isButtonDisabled: false
         }
     })
+
+
 
 </script>
 </html>
