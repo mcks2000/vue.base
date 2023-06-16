@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <title>Vue.js-Class 与 Style 绑定</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div id="app">
+        <div v-bind:class="{ active: isActive }"></div>
+        <div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }"></div>
+        <div v-bind:class="classObject"></div>
+        <div v-bind:class="[activeClass, errorClass]"></div>
+        <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
+        <div v-bind:class="[{ active: isActive }, errorClass]"></div>
+        <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+        <div v-bind:style="styleObject"></div>
+        <div v-bind:style="[baseStyles, overridingStyles]"></div>
+        <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
+
+    </div>
+    <my-component class="baz boo"></my-component>
+
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script>
+    Vue.component('my-component', {
+        template: '<p class="foo bar">Hi</p>'
+    })
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            isActive: false,
+            hasError: false,
+            error: null,
+            activeClass: 'active',
+            errorClass: 'text-danger',
+            activeColor: 'red',
+            fontSize: 30,
+            styleObject: {
+                color: 'red',
+                fontSize: '13px'
+            },
+            baseStyles: {
+                color: 'red',
+                fontSize: '13px'
+            },
+            overridingStyles: {
+                'font-size': '22px'
+            }
+        },
+        computed: {
+            classObject: function () {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            },
+            // styleObject: function () {
+            //     return {
+            //         color: this.activeColor,
+            //         fontSize: this.fontSize + 'px'
+            //     }
+            // }
+        }
+    })
+
+
+
+</script>
+
+
+</html>
