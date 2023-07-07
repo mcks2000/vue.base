@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div id="root">
+        姓：<input type="text" v-model="firstname" ><br></br>
+        名：<input type="text" v-model="lastName" ><br></br>
+        姓名：<span>{{fullName()}}</span>
+    </div>
+    
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script>
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:"#root",
+        data:{
+            firstname :" 张",
+            lastName : "三"
+        },
+        methods:{
+            fullName(){
+                console.log("methods 被调用")
+                return this.firstname + '-'+ this.lastName
+            }
+        }
+    })
+</script>
+
+</html>
