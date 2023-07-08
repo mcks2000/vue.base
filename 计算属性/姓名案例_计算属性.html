@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>姓名案例_计算属性</title>
     
 </head>
 <body>
@@ -12,7 +12,7 @@
         名：<input type="text" v-model="lastName" ><br></br>
         姓名：<span>{{fullName}}</span><br></br>
         姓名：<span>{{fullName}}</span><br></br>
-        姓名：<span>{{fullName}}</span><br></br>
+        姓名：<span>{{fullName2}}</span><br></br>
         姓名：<span>{{fullName}}</span><br></br>
     </div>
     
@@ -40,6 +40,10 @@
                     this.lastName = arr[1]
                     
                 }
+            },
+            fullName2:function(){
+                console.log("get 被调用")
+                    return this.lastName +'-'+ this.firstname 
             }
         }
     })

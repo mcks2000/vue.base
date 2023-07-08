@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例_深度监视_简写</title>
+
+</head>
+
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="changeWeather">切换天气</button>
+        </br>
+        <h3>a 的值是：{{comA}}</h3>
+        <button @click="changeA">a 加一</button>
+        <h3>b 的值是：{{numbers.b}}</h3>
+        <button @click="numbers.b++">b 加一</button>
+    </div>
+
+</body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script>
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            isHot: true,
+            numbers: {
+                a: 1,
+                b: 2
+            }
+        },
+        computed: {
+            info() {
+                return this.isHot ? '炎热' : '凉爽'
+            },
+            comA() {
+                return this.numbers.a
+            }
+        },
+        methods: {
+            changeWeather() {
+                this.isHot = !this.isHot
+            },
+            changeA() {
+                this.numbers.a = this.numbers.a + 1
+            }
+        },
+        watch: {
+            // isHot: {
+            //     handler(newValue, oldValue) {
+            //         console.log("isHot 被修改", newValue, oldValue)
+            //     }
+            // },
+            isHot(newValue, oldValue) {
+                console.log("isHot 被修改", newValue, oldValue)
+            }
+        }
+
+    })
+    // vm.$watch('isHot', {
+    //     handler(newValue, oldValue) {
+    //         console.log("isHot 被修改2", newValue, oldValue)
+    //     }
+    // })
+    vm.$watch('isHot', function (newValue, oldValue) {
+        console.log("isHot 被修改2", newValue, oldValue)
+    }
+    )
+</script>
+
+</html>
