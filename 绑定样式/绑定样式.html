@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绑定样式</title>
+</head>
+
+<body>
+    <div id="root">
+        <div class="basic" :class="mood" @click="changeMood">{{name}}</div>
+        <br />
+        <div class="basic" :class="classArr">{{name}}</div>
+        <br />
+        <div class="basic" :class="classObj">{{name}}</div>
+        <br />
+        <div class="basic" :style="styleObj">{{name}}</div>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            name: "VUE",
+            mood: "happy",
+            classArr: ['happy', 'sad', 'normal'],
+            classObj: {
+                atguigu1: true,
+                atguigu2: false
+            },
+            styleObj:{
+                fontSize:'40px',
+                backgroundColor: 'rgb(193, 52, 228)'
+            }
+        },
+        methods: {
+            changeMood() {
+                // this.mood = 'happy'
+                this.mood = this.classArr[Math.floor(Math.random() * 3)]
+            }
+        },
+    })
+</script>
+<style>
+    .basic {
+        font: 2em sans-serif;
+    }
+
+    .happy {
+        background-color: rgb(193, 52, 228);
+    }
+
+    .sad {
+        background-color: rgb(11, 88, 62);
+    }
+
+    .normal {
+        background-color: rgb(67, 186, 216);
+    }
+
+    .atguigu1 {
+        font-size: large;
+    }
+
+    .atguigu2 {
+        font-weight: 100;
+    }
+
+    .atguigu3 {
+        flex-wrap: nowrap;
+    }
+</style>
+
+</html>

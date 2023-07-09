@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表过滤-computed</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2>人员列表（过滤数组）</h2>
+        <input type="text" placeholder="请输入" v-model="keyWord">
+        <ul>
+            <li v-for="p of filePersons" :key="p.id">
+                {{p.name}}-{{p.age}}
+            </li>
+        </ul>
+
+
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            keyWord: '',
+            persons: [
+                { id: '001', name: '张三', age: 18 },
+                { id: '002', name: '李是', age: 19 },
+                { id: '003', name: '万物', age: 20 }
+            ]
+        },
+        // 计算属性一上来的时候 就会调用一下
+        computed: {
+            filePersons() {
+                return this.persons.filter((p) => {
+                    return p.name.indexOf(this.keyWord) !== -1
+                })
+            }
+        }
+    })
+</script>
+<style>
+    .basic {
+        font: 2em sans-serif;
+    }
+
+    .happy {
+        background-color: rgb(193, 52, 228);
+    }
+
+    .sad {
+        background-color: rgb(11, 88, 62);
+    }
+
+    .normal {
+        background-color: rgb(67, 186, 216);
+    }
+
+    .atguigu1 {
+        font-size: large;
+    }
+
+    .atguigu2 {
+        font-weight: 100;
+    }
+
+    .atguigu3 {
+        flex-wrap: nowrap;
+    }
+</style>
+
+</html>

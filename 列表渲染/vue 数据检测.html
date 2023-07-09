@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue 数据检测</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2>学生信息</h2>
+        <button @click="student.age++">年龄+ 1 岁</button><br/>
+        <button @click="addSex">添加性别属性，默认值：男</button><br/>
+        <button @click.once="addFriend">在列表首行添加一个朋友</button><br/>
+        <button @click="changeFirstOneName">修改第一个朋友的名字为：张三</button><br/>
+        <button @click.once="addHabby">添加一个爱好</button><br/>
+        <button @click="changeFirstOneHabby">修改第一个爱好为：开车</button><br/>
+
+        <h3>姓名：{{student.name}}</h3>
+        <h3>年龄：{{student.age}}</h3>
+        <h3 v-if="student.sex">性别：{{student.sex}}</h3>
+        <h2>爱好</h2>
+        <ul>
+            <li v-for="(h,index) of  student.habby" :key="index">
+                {{h}}
+            </li>
+        </ul>
+        <h2>朋友们</h2>
+        <ul>
+            <li v-for="(f,index) of student.friends" :key="index">
+                {{f.name}}-{{f.age}}
+            </li>
+        </ul>
+
+
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            student:{
+                name:'ali',
+                age:18,
+                habby:['篮球','足球','排球'],
+                friends:[
+                    {name:'tom',age:36},
+                    {name:'jack',age:25}
+                ]
+            }
+        },
+        methods: {
+            addSex(){
+                console.log('执行 addSex 方法')
+                this.$set(this.student,'sex','男')
+            },
+            addFriend(){
+                const new1 = {name:'jim',age:'18'}
+                this.student.friends.unshift(new1)
+            },
+            changeFirstOneName(){
+                this.student.friends[0].name = '张三'
+            },
+            addHabby(){
+                this.student.habby.push('游泳')
+            },
+            changeFirstOneHabby(){
+                this.student.habby.splice(0,1,'开车')
+            }
+        },
+    })
+</script>
+<style>
+    .basic {
+        font: 2em sans-serif;
+    }
+
+    .happy {
+        background-color: rgb(193, 52, 228);
+    }
+
+    .sad {
+        background-color: rgb(11, 88, 62);
+    }
+
+    .normal {
+        background-color: rgb(67, 186, 216);
+    }
+
+    .atguigu1 {
+        font-size: large;
+    }
+
+    .atguigu2 {
+        font-weight: 100;
+    }
+
+    .atguigu3 {
+        flex-wrap: nowrap;
+    }
+</style>
+
+</html>

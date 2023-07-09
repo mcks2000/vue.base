@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+</head>
+
+<body>
+    <div id="root">
+        <div class="basic" :class="classArr" v-show="false">{{name}}</div>
+        <br />
+        <div class="basic" :class="classObj" v-show="1===1">{{name}}</div>
+        <br />
+        <div class="basic" :style="styleObj" v-if="n===1">VUE1</div>
+        <br />
+        <div class="basic" :style="styleObj" v-if="n===2">VUE2</div>
+        <h2>当前n 的值是：{{n}}</h2>
+        <button @click="n++">点我 n+1</button>
+        <template v-if="n===1">
+            <h2>你好 VUE1</h2>
+            <h2>你好 VUE2</h2>
+            <h2>你好 VUE3</h2>
+        </template>
+
+    </div>
+    </div>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            n: 1,
+            name: "VUE",
+            mood: "happy",
+            classArr: ['happy', 'sad', 'normal'],
+            classObj: {
+                atguigu1: true,
+                atguigu2: false
+            },
+            styleObj: {
+                fontSize: '40px',
+                backgroundColor: 'rgb(193, 52, 228)'
+            }
+        },
+        methods: {
+            changeMood() {
+                // this.mood = 'happy'
+                this.mood = this.classArr[Math.floor(Math.random() * 3)]
+            }
+        },
+    })
+</script>
+<style>
+    .basic {
+        font: 2em sans-serif;
+    }
+
+    .happy {
+        background-color: rgb(193, 52, 228);
+    }
+
+    .sad {
+        background-color: rgb(11, 88, 62);
+    }
+
+    .normal {
+        background-color: rgb(67, 186, 216);
+    }
+
+    .atguigu1 {
+        font-size: large;
+    }
+
+    .atguigu2 {
+        font-weight: 100;
+    }
+
+    .atguigu3 {
+        flex-wrap: nowrap;
+    }
+</style>
+
+</html>
