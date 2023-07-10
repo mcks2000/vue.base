@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-html</title>
+</head>
+
+<body>
+    <div id="root">
+        <div>{{name}}</div>
+        <div v-html="str1"></div>
+        <div v-html="str2"></div>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            name:'早上好',
+            str1: '<h1>我要去上班</h1>',
+            str2: '<a href=javascript:location.href="http://baidu.com>我要去上班</a>'
+        }
+    })
+</script>
+
+</html>

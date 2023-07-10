@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收集表单数据</title>
+</head>
+
+<body>
+    <div id="root">
+        <form @submit.prevent="demo">
+            <label for="account">
+                账号：<input type="text" v-model.trim="userInfo.account">
+            </label><br /><br />
+            <label for="password">
+                密码：<input type="password" v-model="userInfo.password">
+            </label><br /><br />
+            <label for="password">
+                年龄<input type="number" v-model.number="userInfo.age">
+            </label><br /><br />
+            <label for="sex">
+                性别:
+                <input type="radio" v-model="userInfo.sex" name="sex" value="male">男
+                <input type="radio" v-model="userInfo.sex" name="sex" value="female">女
+            </label><br /><br />
+            <label for="hobby">
+                爱好：
+                <input type="checkbox" value="swin" v-model="userInfo.hobby">游泳
+                <input type="checkbox" value="study" v-model="userInfo.hobby">学习
+                <input type="checkbox" value="game" v-model="userInfo.hobby">游戏
+            </label><br /><br />
+            <label for="">
+                所属校区：<select name="city" v-model="userInfo.city">
+                    <option value="">请选择校区</option>
+                    <option value="bj">北京</option>
+                    <option value="sh">上海</option>
+                </select>
+            </label><br /><br />
+            <label for="">
+                其他信息：<textarea name="other" v-model.lazy="userInfo.other"></textarea>
+            </label><br /><br />
+            <label for="">
+                阅读并接受：<input type="checkbox" name="agree" v-model="userInfo.agree"><a href="https://www.baidu.com">《隐私协议》</a>
+            </label><br /><br />
+            <button>提交</button>
+        </form>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            userInfo: {
+                account: '',
+                password: '',
+                sex: '',
+                age:'',
+                hobby: [],
+                city: '',
+                other: '',
+                agree: ''
+            }
+
+        },
+        methods: {
+            demo(){
+                console.log(JSON.stringify(this.userInfo))
+            }
+        },
+    })
+</script>
+
+</html>

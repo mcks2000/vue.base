@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收集表单数据</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2>现在的时间是：</h2>
+        <h3>computed实现：{{fmtTime}}</h3>
+        <h3>methods实现：{{getFmtTime()}}</h3>
+        <h3>过滤器实现：{{time | timeFormat}}</h3>
+        <h3>过滤器实现(传参)：{{time | timeFormat('YYYY_MM_DD')}}</h3>
+        <h3>过滤器实现(多个传参)：{{time | timeFormat('YYYY_MM_DD')|spriceFilter}}</h3>
+        <h3 :x="msg | spriceFilter">信息</h3>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    // 全局过滤器
+    Vue.filter('spriceFilter', function (value) {
+        return value.slice(0, 4)
+    })
+
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            time: 1688942003584,
+            msg: '我要去上班'
+        },
+        computed: {
+            fmtTime() {
+                return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+            }
+        },
+        methods: {
+            getFmtTime() {
+                return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+            }
+        },
+        // 局部过滤器
+        filters: {
+            timeFormat(value, str = 'YYYY-MM-DD HH:mm:ss') {
+                return dayjs(value).format(str)
+            },
+            // spriceFilter(value) {
+            //     return value.slice(0, 4)
+            // }
+        }
+    })
+</script>
+
+</html>
