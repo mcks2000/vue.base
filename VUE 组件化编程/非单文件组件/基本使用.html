@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非单文件组件-基本使用</title>
+</head>
+
+<body>
+    <div id="root">
+        <hello></hello>
+        <school></school>
+        <hr />
+        <student></student>
+        <hr />
+        <student></student>
+        <hr />
+        <user></user>
+        <hr />
+        <user2></user2>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const school = Vue.extend({
+        template: `
+        <div>
+            <h2>{{schoolName}}</h2>
+            <h2>{{schoolAddress}}</h2> 
+            <button @click="showName">点我显示名字</button>
+        </div>`,
+        data() {
+            return {
+                schoolName: '中山大学',
+                schoolAddress: '广州'
+            }
+        },
+        methods:{
+            showName(){
+                alert(this.schoolName)
+            }
+        }
+    })
+
+    const student = Vue.extend({
+        template: `
+        <div>
+            <h2>{{studentName}}</h2>
+            <h2>{{studentAge}}</h2> 
+        </div>`,
+        data() {
+            return {
+                studentName: '牛牛',
+                studentAge: ' 5'
+            }
+        }
+    })
+
+    // 简写
+    const user = {
+        template: `
+        <div>
+            <h2>{{name}}</h2>
+            <h2>{{age}}</h2> 
+        </div>`,
+        data() {
+            return {
+                name: '牛牛2',
+                age: '5'
+            }
+        }
+    }
+
+
+    // 命名
+    const user2 = {
+        name:'user132132',
+        template: `
+        <div>
+            <h2>{{name}}</h2>
+            <h2>{{age}}</h2> 
+        </div>`,
+        data() {
+            return {
+                name: 'user2',
+                age: '5'
+            }
+        }
+    }
+
+    const hello = Vue.extend({
+        template: `
+        <div>
+            <h2>hello 你好！{{name}}</h2>
+        </div>`,
+        data() {
+            return {
+                name: 'tom'
+            }
+        }
+    })
+
+    // 全局组件
+    Vue.component('hello',hello)
+
+
+
+    new Vue({
+        el: "#root",
+        date:{
+            hello:"你好"
+        },
+        // 局部注册
+        components: {
+            school,
+            student,
+            user,
+            user2
+        }
+    })
+
+
+</script>
+
+</html>

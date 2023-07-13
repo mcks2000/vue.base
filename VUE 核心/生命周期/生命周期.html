@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2 :style="{opacity}">学习 VUE</h2>
+        <button @click="stop">点我停止转换</button>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            opacity: 1
+        },
+        methods: {
+            stop() {
+                this.opacity = 1
+                clearInterval(this.timer)
+            }
+        },
+        // VUE 完成模板的解析，并把模板的解析放入页面后 调用  mounted
+        // 相当于初始化
+        mounted() {
+            this.timer = setInterval(() => {
+                this.opacity -= 0.01
+                if (this.opacity <= 0) this.opacity = 1
+            }, 16)
+        },
+        // vm销毁之前
+        beforeDestory() {
+            this.opacity = 1
+            clearInterval(this.timer)
+        }
+    })
+</script>
+
+</html>
